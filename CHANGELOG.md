@@ -1,4 +1,5 @@
 ===== v2023.08.24
++ Change transfer to extension behaviour with transfer to nearest 
 + Clear old unused code
 + Add simple tower managment
 + Stub L3 spawn preset
