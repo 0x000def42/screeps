@@ -16,13 +16,9 @@ const TRANSFER_ACTION = ['transfer', (creep) => {
   }
 }]
 
-const TRANSFER_EXTENSION_ACTION = ['transfer', (creep) => {
-  const building = creep.room.find(FIND_STRUCTURES, {
-    filter: (structure) => {
-      return structure.structureType == STRUCTURE_EXTENSION &&
-             structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
-    }
-  })[0]
+const TRANSFER_NEAREST = ['transfer', (creep) => {
+  const building = global.lookupManager.nearestResourceBuildings(creep)[0]
+ 
   return {
     target: () => building,
     allow: !!building
@@ -77,7 +73,7 @@ const roleWorker = {
     ]
     priorities[TIER_TWO] = [
       HARVEST_ACTION,
-      TRANSFER_EXTENSION_ACTION,
+      TRANSFER_NEAREST,
       BUILD_ACTION,
       TRANSFER_ACTION,
       UPGRADE_ACTION

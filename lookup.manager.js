@@ -24,6 +24,18 @@ module.exports = {
     });
     return targets
   },
+  nearestResourceBuildings(creep){
+    const useSpawner = global.spawnManager.spawnNeeds(creep.room)[0]
+    const targets = creep.pos.findInRange(FIND_STRUCTURES, 5, {
+      filter: (structure) => {
+          return ((structure.structureType == STRUCTURE_SPAWN && 
+                    (useSpawner || structure.store.getFreeCapacity(RESOURCE_ENERGY) > 150) ) ||
+                  structure.structureType == STRUCTURE_TOWER) && 
+                  structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+        }
+    });
+    return targets
+  },
 
   roomSources(room){
     return room.find(FIND_SOURCES)
