@@ -53,6 +53,11 @@ module.exports = {
         [TIER_ONE_WORKER, 1],
         [TIER_TWO_WORKER, 2]
       ]
+    } else if(room.controller.level == 3){
+      return [
+        [TIER_ONE_WORKER, 1],
+        [TIER_TWO_WORKER, 3]
+      ]
     }
 
     return []

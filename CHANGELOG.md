@@ -1,3 +1,8 @@
+===== v2023.08.24
++ Clear old unused code
++ Add simple tower managment
++ Stub L3 spawn preset
+
 ===== v2023.08.22
 + Add memory cleaning of dead creeps 
 + Add transfer action
