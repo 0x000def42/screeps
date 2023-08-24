@@ -5,10 +5,10 @@ module.exports = {
   roomSpawner(room){
     return room.find(FIND_MY_SPAWNS)[0]
   },
-  tier1Workers(room){
+  findCreeps(room, role, tier){
     return room.find(FIND_MY_CREEPS, {
       filter: object =>  { 
-        return object.memory.role == 'worker' && object.memory.tier == 1
+        return object.memory.role == role && object.memory.tier == tier
       }
     })
   },

@@ -35,12 +35,22 @@ module.exports = {
   spawnNeeds(room){
     const needs = []
     
-    if(room.controller.level == 1){
-      if(lookupManager.tier1Workers(room).length < 2){
-        needs.push(TIER_ONE_WORKER)
+    this.spawnNeedConfig(room).forEach(([template, count]) => {
+      console.log(global.lookupManager.findCreeps(room, template.memory.role, template.memory.tier).length < count)
+      if(global.lookupManager.findCreeps(room, template.memory.role, template.memory.tier).length < count){
+        needs.push(template)
       }
-    }
+    })
     return needs
+  },
+  spawnNeedConfig(room){
+    if(room.controller.level == 1){
+      return [
+        [TIER_ONE_WORKER, 2]
+      ]
+    }
+
+    return []
   }
 }
 
