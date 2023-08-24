@@ -6,6 +6,12 @@ global.spawnManager = require('./spawn.manager');
 global.roleWorker = require('./role.worker');
 
 module.exports.loop = function () {
+  for(var name in Memory.creeps) {
+    if(!Game.creeps[name]) {
+        delete Memory.creeps[name];
+        console.log('Clearing non-existing creep memory:', name);
+    }
+  }
   lookupManager.rooms().forEach(room => {
     spawnManager.run(room)
   });
@@ -22,12 +28,7 @@ module.exports.loop = function () {
 
   
 
-  // for(var name in Memory.creeps) {
-  //     if(!Game.creeps[name]) {
-  //         delete Memory.creeps[name];
-  //         console.log('Clearing non-existing creep memory:', name);
-  //     }
-  // }
+
 
   // var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
   // console.log('Harvesters: ' + harvesters.length);
