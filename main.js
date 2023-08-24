@@ -27,10 +27,12 @@ module.exports.loop = function () {
     
       for(var name in Game.creeps) {
         var creep = Game.creeps[name];
-        if(creep.memory.role == 'worker') {
-          if(!creep.memory.action){
-            roleWorker.lookupAction(creep)
-          }
+        if(!creep.memory.action){
+          roleWorker.lookupAction(creep)
+        }
+        roleWorker.run(creep);
+        if(!creep.memory.action){
+          roleWorker.lookupAction(creep)
           roleWorker.run(creep);
         }
       }

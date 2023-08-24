@@ -18,7 +18,8 @@ module.exports = {
       filter: (structure) => {
           return ((structure.structureType == STRUCTURE_SPAWN && 
                     (useSpawner || structure.store.getFreeCapacity(RESOURCE_ENERGY) > 150) ) ||
-                  structure.structureType == STRUCTURE_TOWER) && 
+                  structure.structureType == STRUCTURE_TOWER ||
+                  structure.structureType == STRUCTURE_EXTENSION) && 
                   structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
         }
     });
@@ -30,7 +31,8 @@ module.exports = {
       filter: (structure) => {
           return ((structure.structureType == STRUCTURE_SPAWN && 
                     (useSpawner || structure.store.getFreeCapacity(RESOURCE_ENERGY) > 150) ) ||
-                  structure.structureType == STRUCTURE_TOWER) && 
+                  structure.structureType == STRUCTURE_TOWER ||
+                  structure.structureType == STRUCTURE_EXTENSION) && 
                   structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
         }
     });
