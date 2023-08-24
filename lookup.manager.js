@@ -16,11 +16,10 @@ module.exports = {
     const useSpawner = global.spawnManager.spawnNeeds(room)[0]
     const targets = room.find(FIND_STRUCTURES, {
       filter: (structure) => {
-        const minCapacity = structure.structureType == STRUCTURE_SPAWN ? 50 : 0 
-          return (structure.structureType == STRUCTURE_EXTENSION ||
-                  (structure.structureType == STRUCTURE_SPAWN && useSpawner ) ||
+          return ((structure.structureType == STRUCTURE_SPAWN && 
+                    (useSpawner || structure.store.getFreeCapacity(RESOURCE_ENERGY) > 150) ) ||
                   structure.structureType == STRUCTURE_TOWER) && 
-                  structure.store.getFreeCapacity(RESOURCE_ENERGY) > minCapacity;
+                  structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
         }
     });
     return targets

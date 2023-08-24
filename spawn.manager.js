@@ -11,8 +11,9 @@ const TIER_TWO_WORKER = {
   body: [WORK, CARRY, MOVE, WORK],
   memory: {
     role: 'worker',
-    tier: 1
-  }
+    tier: 2
+  },
+  name: 'T2 Worker'
 }
 
 module.exports = {
@@ -36,7 +37,6 @@ module.exports = {
     const needs = []
     
     this.spawnNeedConfig(room).forEach(([template, count]) => {
-      console.log(global.lookupManager.findCreeps(room, template.memory.role, template.memory.tier).length < count)
       if(global.lookupManager.findCreeps(room, template.memory.role, template.memory.tier).length < count){
         needs.push(template)
       }
@@ -48,6 +48,11 @@ module.exports = {
       return [
         [TIER_ONE_WORKER, 2]
       ]
+    } else if(room.controller.level == 2){
+      return [
+        [TIER_ONE_WORKER, 1],
+        [TIER_TWO_WORKER, 2]
+      ]
     }
 
     return []
@@ -57,7 +62,11 @@ module.exports = {
 function spawnCreep(spawner, creepTemplate){
   const newName = creepTemplate.name + ' ' + Game.time
   const spawnResult = spawner.spawnCreep(creepTemplate.body, newName, {
-    memory: creepTemplate.memory
+    memory: creepTemplate.memory,
+    energyStructures: [
+      ...spawner.room.find(FIND_MY_STRUCTURES, {filter: { structureType: STRUCTURE_EXTENSION }}),
+      global.lookupManager.roomSpawner(spawner.room)
+    ]
   })
 }
 
